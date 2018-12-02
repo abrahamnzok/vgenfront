@@ -3,7 +3,7 @@
     <div class="cf pa2">
       <h2 class="system-sans-serif f4 fw4 mv ttc tracked gray">{{type}}</h2>
       <!-- Gallery Vignette -->
-      <div v-for="(media, index) in mediaType" :key="index" class="fl w-50 w-25-m w-20-l pa2">
+      <div v-for="(media, index) in medias" :key="index" class="fl w-50 w-25-m w-20-l pa2">
         <div class="db tc black-10">
           <img
             :src="media.src"
@@ -24,7 +24,10 @@
 export default {
   name: 'Vignette',
   props: {
-    mediaType: {
+    type: {
+      type: String,
+    },
+    medias: {
       type: Array,
     },
     inputType: {

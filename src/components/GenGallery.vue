@@ -1,15 +1,11 @@
 <template>
   <div v-show="activate" class="gallery">
-    <Vignette type="mandatories" :mediaType="mandatories"/>
-    <Vignette type="optionals" :mediaType="optionals" inputType="checkbox"/>
-    <Vignette type="alternatives" :mediaType="alternatives" inputType="radio"/>
-
+    <Vignette type="mandatories" :medias="medias"/>
   </div>
 </template>
 
 <script>
 /* eslint-disable vue/no-side-effects-in-computed-properties,no-console,no-return-await */
-import _ from 'lodash';
 import Vignette from './Vignette';
 import { fetchMedias } from '../videogenapi';
 
@@ -27,11 +23,11 @@ export default {
       medias: [],
     };
   },
-  asyncComputed: {
-    mandatories: async () => _.filter(await fetchMedias(), data => data.mediatype === 'mandatory'),
-    optionals: async () => _.filter(await fetchMedias(), data => data.mediatype === 'optional'),
-    alternatives: async () => _.filter(await fetchMedias(), data => data.mediatype === 'alternative'),
-
+  created() {
+    const vm = this;
+    fetchMedias().then((response) => {
+      vm.medias = response;
+    });
   },
 };
 </script>
