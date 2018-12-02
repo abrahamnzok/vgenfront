@@ -17,6 +17,7 @@
                :disabled="type === 'mandatories'"
                :value="media.mediasrc"
                :type="inputType"
+               @change="handleUsersChoice($event)"
                :id="inputType">
       </div>
       <!-- Gallery Vignette -->
@@ -25,6 +26,7 @@
 </template>
 
 <script>
+
 export default {
   name: 'Vignette',
   props: {
@@ -37,6 +39,11 @@ export default {
     inputType: {
       type: String,
       default: '',
+    },
+  },
+  methods: {
+    handleUsersChoice(event) {
+      this.$store.commit('handleUserChoice', event);
     },
   },
 };

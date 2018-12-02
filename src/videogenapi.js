@@ -1,14 +1,13 @@
 import { server } from '../axios.config';
 
-export async function generateCompilation() {
+export async function generateCompilation(autogeneration = true, name = 'idm', playlist = '') {
   try {
     const response = await server.get('compile/autogenerate/', {
       params: {
-        autogen: true,
-        filename: 'vue',
+        autogen: autogeneration,
+        filename: name,
       },
-      data: {},
-      responseType: 'stream',
+      data: playlist,
     });
     return response.data;
   } catch (e) {
