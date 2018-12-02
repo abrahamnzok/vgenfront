@@ -14,6 +14,8 @@ export const store = new Vuex.Store({
     userChoice: [],
     outputLocation: '',
     variants: [],
+    activateGif: false,
+    activateAutogen: false,
   },
   getters: {
     mandatory(state) {
@@ -47,6 +49,8 @@ export const store = new Vuex.Store({
     },
     setVariantsData(state, data) {
       state.variants = data;
+      state.activateGif = true;
+      state.activateAutogen = true;
     },
   },
   actions: {

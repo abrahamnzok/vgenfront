@@ -8,9 +8,9 @@
     <button class="f6 link dim br3 ba ph3 pv2 mb2 dib black"
             @click="generateCompilation">Generate Compilation</button>
     <button class="f6 link dim br3 ba ph3 pv2 mb2 dib black"
-            @click="autoGenerate">Autogenerate Compilation</button>
+            v-show="activateAutogen" @click="autoGenerate">Autogenerate Compilation</button>
     <button class="f6 link dim br3 ba ph3 pv2 mb2 dib black"
-            v-show="true" @click="generateGif">Generate Gif</button>
+            v-show="activateGif" @click="generateGif">Generate Gif</button>
     <button class="f6 link dim br3 ba ph3 pv2 mb2 dib black"
             v-show="true" @click="consoleData">Generate possible combination</button>
   </div>
@@ -32,15 +32,19 @@ export default {
   data: () => ({
     autogeneration: true,
     variants: [],
+    activateGif: false,
+    activateAutogen: false,
   }),
   created() {
     this.$store.dispatch('fetchData');
     this.$store.dispatch('fetchVariantData');
+    this.activateAutogen = this.$store.state.activateAutogen;
   },
   methods: {
     async generateCompilation() {
       this.autogeneration = false;
       await generateCompilation(this.autogeneration, 'videogen', this.$store.state.userChoice);
+      this.activateGif = this.$store.state.activateGif;
     },
     async autoGenerate() {
       this.autogeneration = true;
