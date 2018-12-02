@@ -9,12 +9,16 @@
             @click="generateCompilation">Generate Compilation</button>
     <button class="f6 link dim br3 ba ph3 pv2 mb2 dib black"
             @click="autoGenerate">Autogenerate Compilation</button>
+    <button class="f6 link dim br3 ba ph3 pv2 mb2 dib black"
+            v-show="true" @click="generateGif">Generate Gif</button>
+    <button class="f6 link dim br3 ba ph3 pv2 mb2 dib black"
+            v-show="true" @click="consoleData">Generate possible combination</button>
   </div>
 </template>
 
 <script>
 import Vignette from './Vignette';
-import { generateCompilation } from '../videogenapi';
+import { generateCompilation, fetchGif } from '../videogenapi';
 
 export default {
   name: 'GenGallery',
@@ -27,9 +31,11 @@ export default {
   },
   data: () => ({
     autogeneration: true,
+    variants: [],
   }),
   created() {
     this.$store.dispatch('fetchData');
+    this.$store.dispatch('fetchVariantData');
   },
   methods: {
     async generateCompilation() {
@@ -39,6 +45,12 @@ export default {
     async autoGenerate() {
       this.autogeneration = true;
       await generateCompilation(this.autogeneration);
+    },
+    async generateGif() {
+      await fetchGif('idmgif');
+    },
+    consoleData() {
+      this.variants = this.$store.state.variants;
     },
   },
   computed: {
@@ -55,6 +67,5 @@ export default {
 };
 </script>
 
-<style scoped>
-
+<style >
 </style>

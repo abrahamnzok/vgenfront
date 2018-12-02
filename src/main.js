@@ -5,8 +5,8 @@ import Vue from 'vue';
 // eslint-disable-next-line import/first
 import App from './App';
 import '!style-loader!css-loader!tachyons/css/tachyons.css';
-import router from './router';
 import { store } from './store/store';
+import router from './router';
 
 Vue.config.productionTip = false;
 

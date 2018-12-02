@@ -57,7 +57,7 @@ export const store = new Vuex.Store({
     },
     fetchVariantData(context) {
       fetchVariantsData().then((data) => {
-        context.commit('seVariantsData', data);
+        context.commit('setVariantsData', data);
       });
     },
   },
