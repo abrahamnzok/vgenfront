@@ -13,7 +13,11 @@
           </dl>
         </div>
         <label :for="inputType"></label>
-        <input v-show="inputType !== ''" :type="inputType" :id="inputType">
+        <input :checked="type === 'mandatories'"
+               :disabled="type === 'mandatories'"
+               :value="media.mediasrc"
+               :type="inputType"
+               :id="inputType">
       </div>
       <!-- Gallery Vignette -->
     </div>

@@ -1,13 +1,17 @@
 <template>
   <div v-show="activate" class="gallery">
-    <Vignette type="mandatories" :medias="medias"/>
+    <Vignette inputType="checkbox"
+              type="mandatories"
+              :medias="mandatories"/>
+    <Vignette inputType="checkbox"
+              type="optionals"
+              :medias="optionals"/>
+    <Vignette inputType="checkbox" type="alternatives" :medias="alternatives"/>
   </div>
 </template>
 
 <script>
-/* eslint-disable vue/no-side-effects-in-computed-properties,no-console,no-return-await */
 import Vignette from './Vignette';
-import { fetchMedias } from '../videogenapi';
 
 export default {
   name: 'GenGallery',
@@ -18,16 +22,19 @@ export default {
       default: true,
     },
   },
-  data() {
-    return {
-      medias: [],
-    };
-  },
   created() {
-    const vm = this;
-    fetchMedias().then((response) => {
-      vm.medias = response;
-    });
+    this.$store.dispatch('fetchData');
+  },
+  computed: {
+    mandatories() {
+      return this.$store.getters.mandatory;
+    },
+    optionals() {
+      return this.$store.getters.optionals;
+    },
+    alternatives() {
+      return this.$store.getters.alternatives;
+    },
   },
 };
 </script>
