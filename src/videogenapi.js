@@ -15,11 +15,11 @@ export async function generateCompilation(autogeneration = true, name = 'idm', p
   }
 }
 
-export async function fetchGif() {
+export async function fetchGif(name = 'idmgif') {
   try {
     const response = await server.get('compile/gif/', {
       params: {
-        gifname: 'vue',
+        gifname: name,
       },
     });
     return response.data;
