@@ -9,6 +9,8 @@ Vue.use(Vuex);
 export const store = new Vuex.Store({
   state: {
     medias: [],
+    mandatory: [],
+    mandatoriesSrc: [],
     userChoice: [],
   },
   getters: {
@@ -25,6 +27,18 @@ export const store = new Vuex.Store({
   mutations: {
     setData(state, data) {
       state.medias = data;
+      state.mandatory = _.filter(state.medias, media => media.mediatype === 'mandatory');
+      state.mandatory.forEach((media) => {
+        state.mandatoriesSrc.push(media.mediasrc);
+      });
+      state.userChoice = state.mandatoriesSrc;
+    },
+    handleUserChoice(state, event) {
+      if (event.target.checked) {
+        state.userChoice.push(event.target.value);
+      } else {
+        _.remove(state.userChoice, media => media === event.target.value);
+      }
     },
   },
   actions: {
