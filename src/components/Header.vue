@@ -6,7 +6,7 @@
           Videogen Platform
         </span>
       </h3>
-      <h5 class="f6 ttu tracked black-80">By Adam MUBANZO</h5>
+      <h5 class="f6 ttu tracked black-80">By Abraham MUBANZO</h5>
     </div>
   </header>
 </template>
