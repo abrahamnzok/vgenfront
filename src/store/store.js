@@ -2,7 +2,7 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
 import _ from 'lodash';
-import { fetchMedias } from '../videogenapi';
+import { fetchMedias, fetchVariantsData } from '../videogenapi';
 
 Vue.use(Vuex);
 
@@ -12,6 +12,8 @@ export const store = new Vuex.Store({
     mandatory: [],
     mandatoriesSrc: [],
     userChoice: [],
+    outputLocation: '',
+    variants: [],
   },
   getters: {
     mandatory(state) {
@@ -22,6 +24,9 @@ export const store = new Vuex.Store({
     },
     alternatives(state) {
       return _.filter(state.medias, media => media.mediatype === 'alternative');
+    },
+    mediavariants(state) {
+      return state.variants;
     },
   },
   mutations: {
@@ -40,11 +45,19 @@ export const store = new Vuex.Store({
         _.remove(state.userChoice, media => media === event.target.value);
       }
     },
+    setVariantsData(state, data) {
+      state.variants = data;
+    },
   },
   actions: {
     fetchData(context) {
       fetchMedias().then((data) => {
         context.commit('setData', data);
+      });
+    },
+    fetchVariantData(context) {
+      fetchVariantsData().then((data) => {
+        context.commit('seVariantsData', data);
       });
     },
   },
